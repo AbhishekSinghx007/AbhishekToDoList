@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abhishek's To-Do List</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      background: white;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 70%;
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      background: #f9f9f9;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li.done {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    .actions button {
+      margin-left: 5px;
+      background-color: #28a745;
+    }
+
+    .actions .delete {
+      background-color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>📝 Abhishek's To-Do List</h2>
+  <input type="text" id="taskInput" placeholder="Enter a new task" />
+  <button onclick="addTask()">Add</button>
+
+  <ul id="taskList"></ul>
+</div>
+
+<script>
+  function addTask() {
+    const input = document.getElementById("taskInput");
+    const taskText = input.value.trim();
+
+    if (taskText === "") {
+      alert("Please enter a task.");
+      return;
+    }
+
+    // Create list item
+    const li = document.createElement("li");
+    li.innerText = taskText;
+
+    // Create action buttons
+    const actions = document.createElement("div");
+    actions.className = "actions";
+
+    const doneBtn = document.createElement("button");
+    doneBtn.innerText = "Done";
+    doneBtn.onclick = () => {
+      li.classList.toggle("done");
+    };
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "Delete";
+    deleteBtn.className = "delete";
+    deleteBtn.onclick = () => {
+      li.remove();
+    };
+
+    actions.appendChild(doneBtn);
+    actions.appendChild(deleteBtn);
+    li.appendChild(actions);
+
+    document.getElementById("taskList").appendChild(li);
+
+    input.value = ""; // Clear input
+  }
+</script>
+
+</body>
+</html>
